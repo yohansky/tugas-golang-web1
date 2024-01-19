@@ -6,6 +6,7 @@ import (
 	"net/http"
 )
 
+//blueprint
 type About struct {
 	Tentang string
 }
@@ -41,17 +42,22 @@ type Valve struct {
 }
 
 func HandlerAbout(w http.ResponseWriter, r *http.Request) {
-	if r.Method == "GET" {
+	//validasi method
+	if r.Method == "GET" { //jika method GET maka eksekusi kode dibawah
+		//implementasi blueprint
 		obj:= About {
 			Tentang: "ini adalah website list game dari semua developer games oleh Yohanes Hubert,silahkan di cek!",
 		}
-		res, err := json.Marshal(obj)
-		if err != nil {
+		//konversi ke json
+		res, err := json.Marshal(obj) // mengubah struct menjadi json
+		//validasi konversi json
+		if err != nil { //jika gagal konversi ke json
 			http.Error(w, "Gagal konversi ke Json", http.StatusInternalServerError)
 		}
-		w.Write(res)
+		w.Write(res)// tulis res
+		//set header
 		w.Header().Set("Content-Type","application/json")
-	} else {
+	} else { // kalau menggunakan metod yang lain maka error
 		http.Error(w, "Method tidak diizinkan", http.StatusMethodNotAllowed)
 	}
 }
@@ -147,13 +153,13 @@ func HandlerVal(w http.ResponseWriter, r *http.Request) {
 }
 
 func main() {
-	http.HandleFunc("/about", HandlerAbout)
+	http.HandleFunc("/about", HandlerAbout) //anonymouse function, harus pascal case (besar semua di depan)
 	http.HandleFunc("/listgemscool", Handlergm)
 	http.HandleFunc("/listhoyo", HandlerHoyo)
 	http.HandleFunc("/listea", HandlerEA)
 	http.HandleFunc("/listrg", HandlerRG)
 	http.HandleFunc("/listval", HandlerVal)
-	fmt.Println("Server running at http://localhost:8080")
+	fmt.Println("Server running at http://localhost:8080") // tampil di console.log
 	fmt.Println("Pastikan baca di /about dulu ya sebelum mengakases :)")
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8080", nil)//port koneksi ke port :8080
 }
