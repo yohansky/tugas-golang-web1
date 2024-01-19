@@ -1,4 +1,4 @@
-Halo, Saya Yohanes <br>
+Halo, Saya Yohanes Batch 1 Golang <br>
 Saya adalah Talent Pijar Camp <br>
 Di repository ini terdapat hasil/Jawaban Tugas pertama saya dalam SQL Postgres <br>
 
